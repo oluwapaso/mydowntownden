@@ -62,7 +62,7 @@ const SideBars = () => {
             ],
         },
         {
-            "title": "Reservations", "link": `/admin/reservations?keyword=&date_type=None&from_date=${moment().format("YYYY-MM-DD")}&to_date=${moment().add(31, "days").format("YYYY-MM-DD")}&page=1`, "icon": <PiCalendar />
+            "title": "Reservations", "link": `/admin/reservations?keyword=&date_type=None&from_date=${moment().format("YYYY-MM-DD")}&to_date=${moment().add(32, "days").format("YYYY-MM-DD")}&page=1`, "icon": <PiCalendar />
         },
     ]
 

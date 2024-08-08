@@ -118,7 +118,7 @@ const AddNewReservation = () => {
 
     return (
         <div className='w-full'>
-            <PageTitle text="Company Info" show_back={true} />
+            <PageTitle text="Add Reservation" show_back={true} />
             <div className='container m-auto max-w-[650px] lg:max-w-[1100px]'>
                 <div className='w-full mt-6'>
                     <div className='w-full grid grid-cols-1 lg:grid-cols-3 gap-4'>

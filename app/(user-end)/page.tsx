@@ -456,7 +456,7 @@ export default function Home() {
           </div>
 
           <div className="w-full flex justify-center text-center items-center mt-6">
-            <CustomLinkMain href={`/search?neighborhood=All Neighborhoods&move_in=${moment(moment().add(1, "day")).format("YYYY-MM-DD")}&move_out=${moment(moment().add(31, "days")).format("YYYY-MM-DD")}&map_bounds=${JSON.stringify({ north: 42.60242525588096, south: 42.171848287543746, east: -70.73319879101562, west: -71.38688531445312 })}`} className="text-white px-8 py-3 bg-gray-950 cursor-pointer hover:shadow-2xl 
+            <CustomLinkMain href={`/search?neighborhood=All Neighborhoods&move_in=${moment(moment().add(1, "day")).format("YYYY-MM-DD")}&move_out=${moment(moment().add(32, "days")).format("YYYY-MM-DD")}&map_bounds=${JSON.stringify({ north: 42.60242525588096, south: 42.171848287543746, east: -70.73319879101562, west: -71.38688531445312 })}`} className="text-white px-8 py-3 bg-gray-950 cursor-pointer hover:shadow-2xl 
             hover:shadow-gray-900">Start Now</CustomLinkMain>
           </div>
         </div>
@@ -538,7 +538,7 @@ export default function Home() {
 
               <div className="w-full mt-6">
                 <CustomLinkMain className="cursor-pointer mt-4 flex justify-center duration-300 font-normal w-[260px] px-8 py-4 text-primary 
-                bg-white border border-primary hover:bg-primary hover:text-white hover:shadow-2xl" href="/about-us">
+                bg-white border border-primary hover:bg-primary hover:text-white hover:shadow-2xl" href={`/search?neighborhood=All Neighborhoods&move_in=${moment(moment().add(1, "day")).format("YYYY-MM-DD")}&move_out=${moment(moment().add(32, "days")).format("YYYY-MM-DD")}&map_bounds=${JSON.stringify({ north: 42.60242525588096, south: 42.171848287543746, east: -70.73319879101562, west: -71.38688531445312 })}`}>
                   VIEW ALL APARTMENTS
                 </CustomLinkMain>
               </div>
@@ -600,7 +600,7 @@ export default function Home() {
               <div className="w-full">
                 <CustomLinkMain className="cursor-pointer mt-4 flex justify-center duration-300 font-normal w-[200px] px-8 py-4 text-primary 
                 bg-transparent border border-primary hover:bg-primary hover:text-white hover:shadow-2xl"
-                  href={`/search?neighborhood=All Neighborhoods&move_in=${moment(moment().add(1, "day")).format("YYYY-MM-DD")}&move_out=${moment(moment().add(31, "days")).format("YYYY-MM-DD")}&map_bounds=${JSON.stringify({ north: 42.60242525588096, south: 42.171848287543746, east: -70.73319879101562, west: -71.38688531445312 })}`}>
+                  href={`/search?neighborhood=All Neighborhoods&move_in=${moment(moment().add(1, "day")).format("YYYY-MM-DD")}&move_out=${moment(moment().add(32, "days")).format("YYYY-MM-DD")}&map_bounds=${JSON.stringify({ north: 42.60242525588096, south: 42.171848287543746, east: -70.73319879101562, west: -71.38688531445312 })}`}>
                   BOOK NOW
                 </CustomLinkMain>
               </div>
@@ -699,7 +699,7 @@ export default function Home() {
         <div className="w-full mx-auto max-w-[600px] lg:max-w-[1000px] px-4 lg:px-20">
           <div className="text-white font-normal text-6xl">Book Your Stay<br />Today</div>
           <div className="w-full mt-8">
-            <CustomLinkMain href={`/search?neighborhood=All Neighborhoods&move_in=${moment(moment().add(1, "day")).format("YYYY-MM-DD")}&move_out=${moment(moment().add(31, "days")).format("YYYY-MM-DD")}&map_bounds=${JSON.stringify({ north: 42.60242525588096, south: 42.171848287543746, east: -70.73319879101562, west: -71.38688531445312 })}`}
+            <CustomLinkMain href={`/search?neighborhood=All Neighborhoods&move_in=${moment(moment().add(1, "day")).format("YYYY-MM-DD")}&move_out=${moment(moment().add(32, "days")).format("YYYY-MM-DD")}&map_bounds=${JSON.stringify({ north: 42.60242525588096, south: 42.171848287543746, east: -70.73319879101562, west: -71.38688531445312 })}`}
               className="text-primary px-8 py-4 bg-white cursor-pointer hover:shadow-2xl hover:text-white 
               hover:bg-primary duration-300">Book Now</CustomLinkMain>
           </div>

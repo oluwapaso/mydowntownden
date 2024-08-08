@@ -88,7 +88,7 @@ function NavBar({ page }: NavProps) {
             <div className={`nav-menu-container hidden lg:flex justify-end items-center select-none flex-wrap`}>
                 <div className='menu-container mr-5'>
                     <div className={`flex flex-row justify-end items-center space-x-5 cursor-pointer *:font-normal`}>
-                        <CustomLinkMain href={`/search?neighborhood=All Neighborhoods&move_in=${moment(moment().add(1, "day")).format("YYYY-MM-DD")}&move_out=${moment(moment().add(31, "days")).format("YYYY-MM-DD")}&map_bounds=${JSON.stringify({ north: 42.60242525588096, south: 42.171848287543746, east: -70.73319879101562, west: -71.38688531445312 })}`} className='bg-primary text-white px-4 py-3 transition duration-300 
+                        <CustomLinkMain href={`/search?neighborhood=All Neighborhoods&move_in=${moment(moment().add(1, "day")).format("YYYY-MM-DD")}&move_out=${moment(moment().add(32, "days")).format("YYYY-MM-DD")}&map_bounds=${JSON.stringify({ north: 42.60242525588096, south: 42.171848287543746, east: -70.73319879101562, west: -71.38688531445312 })}`} className='bg-primary text-white px-4 py-3 transition duration-300 
                             rounded hover:shadow-md cursor-pointer flex items-center'>
                             <div className='flex flex-row items-center'>
                                 <BiSearch size={16} className='mr-1' /> <span className='uppercase text-sm mr-1'>Discover Dens</span>
@@ -151,7 +151,7 @@ function NavBar({ page }: NavProps) {
                                 <div>Home</div>
                             </CustomLinkMain>
 
-                            <CustomLinkMain href={`/search?neighborhood=All Neighborhoods&move_in=${moment(moment().add(1, "day")).format("YYYY-MM-DD")}&move_out=${moment(moment().add(31, "days")).format("YYYY-MM-DD")}&map_bounds=${JSON.stringify({ north: 42.60242525588096, south: 42.171848287543746, east: -70.73319879101562, west: -71.38688531445312 })}`}>
+                            <CustomLinkMain href={`/search?neighborhood=All Neighborhoods&move_in=${moment(moment().add(1, "day")).format("YYYY-MM-DD")}&move_out=${moment(moment().add(32, "days")).format("YYYY-MM-DD")}&map_bounds=${JSON.stringify({ north: 42.60242525588096, south: 42.171848287543746, east: -70.73319879101562, west: -71.38688531445312 })}`}>
                                 <div>Discover Dens</div>
                             </CustomLinkMain>
 

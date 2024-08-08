@@ -51,7 +51,7 @@ export default function SearchPage() {
     min_square_feet: 0,
     max_square_feet: 0,
     move_in: searchParams?.get("move_in") || moment(moment().add(1, "day")).format("YYYY-MM-DD"),
-    move_out: searchParams?.get("move_out") || moment(moment().add(31, "days")).format("YYYY-MM-DD"),
+    move_out: searchParams?.get("move_out") || moment(moment().add(32, "days")).format("YYYY-MM-DD"),
     map_bounds: { north: 42.60242525588096, south: 42.171848287543746, east: -70.73319879101562, west: -71.38688531445312 },
     zoom: 13,
     page: curr_page,
