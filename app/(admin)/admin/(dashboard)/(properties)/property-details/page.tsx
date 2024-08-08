@@ -126,14 +126,14 @@ const GetPropertyDetails = () => {
         </CustomLink>
 
         {property.property_type == "Multi Unit Type" &&
-            <CustomLink href={`/admin/clone-unit?property_id=${property_id}`} className='bg-sky-700 text-white flex 
+            <CustomLink href={`/admin/clone-unit?property_id=${property_id}`} className='bg-sky-700 text-white hidden 
             items-center justify-center ml-2 py-1 h-10 px-4 text-sm font-medium hover:drop-shadow-xl rounded-md'>
                 <MdContentCopy className='mr-2 !text-base' />
                 Clone Unit
             </CustomLink>
         }
 
-        <div className='bg-pink-700 text-white flex items-center justify-center ml-2 py-1 h-10 px-4 text-sm font-medium 
+        <div className='bg-pink-700 text-white hidden items-center justify-center ml-2 py-1 h-10 px-4 text-sm font-medium 
             hover:drop-shadow-xl rounded-md cursor-pointer' onClick={handleDelete}>
             <FaRegTrashAlt size={13} /> <span className='ml-1'>Delete</span>
         </div>
