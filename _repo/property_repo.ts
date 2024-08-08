@@ -716,7 +716,7 @@ export class MYSQLPropertyRepo implements PropertyRepo {
             } else if(search_by == "Favorites-Active" || search_by == "Favorites-Sold"){
                 
                 const user_id  = params.user_id;
-                fields = fields.replace(/p./gi, "")
+                fields = fields.replace(/p\./gi, "");
                 const field_array = fields.split(",");
                 const fieldsRslt = field_array.map(entry => 'L.' + entry).join(', ');
                 
