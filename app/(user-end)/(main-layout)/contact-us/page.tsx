@@ -78,7 +78,7 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center">
       <NavBar page="Home" />
-      <section className="w-full bg-[#1C2E3B] py-16 lg:py-32 px-4 2xl:p-0">
+      <section className="w-full bg-[#1C2E3B] py-16 lg:py-32 px-4 2xl:px-0">
         <div className="container mx-auto max-w-[600px] lg:max-w-[1350px] *:text-white">
 
           <div className="w-full grid grid-cols-1 lg:grid-cols-2 items-center justify-between gap-20">
