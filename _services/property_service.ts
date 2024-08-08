@@ -551,7 +551,7 @@ export class PropertyService {
 
         const params = req.body;
         let image_to_delete = params.image_to_delete;
-        image_to_delete = image_to_delete.replace("https://website-upload.s3.amazonaws.com/", "");
+        image_to_delete = image_to_delete.replace(`https://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME}.s3.amazonaws.com/`, "");
         const prop_images = params.prop_images;
         const property_id = params.property_id;
         
@@ -568,7 +568,7 @@ export class PropertyService {
 
         let new_images = prop_images;
         if(Array.isArray(prop_images)){
-            new_images = prop_images.filter((val)=> val!= `https://website-upload.s3.amazonaws.com/${image_to_delete}`);
+            new_images = prop_images.filter((val)=> val!= `https://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME}.s3.amazonaws.com/${image_to_delete}`);
         }else{
             default_resp.message = "Invalid image posted."
             return default_resp as APIResponseProps;
@@ -628,7 +628,7 @@ export class PropertyService {
         if(Array.isArray(images)){
             for(const image of images){
                 if(image){
-                    const image_to_delete = image.replace("https://website-upload.s3.amazonaws.com/", "");
+                    const image_to_delete = image.replace(`https://${process.env.NEXT_PUBLIC_AWS_S3_BUCKET_NAME}.s3.amazonaws.com/`, "");
                     await this.deleteS3Image(image_to_delete);
                 }
             }
