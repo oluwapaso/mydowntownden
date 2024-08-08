@@ -68,7 +68,7 @@ export class PropertyService {
 
     private parseForm(req: NextApiRequest): Promise<{ fields: formidable.Fields, files: formidable.Files }> {
         const form = formidable({
-            uploadDir: path.join(process.cwd(), 'tmp'),
+            uploadDir: path.join(process.cwd(), ''), //tmp
             keepExtensions: true,
         });
 
