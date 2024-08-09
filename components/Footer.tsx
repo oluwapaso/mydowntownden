@@ -21,9 +21,9 @@ const Footer = ({ page }: { page?: string }) => {
         <section className='w-full py-8 md:py-14 bg-primary text-white' id='footer'>
             <div className='container mx-auto max-w-[1200px] px-0 lg:px-3 xl:px-0 text-left'>
 
-                <div className={`w-full grid grid-cols-2 md:grid-cols-3 gap-5 *:font-normal *:text-lg *:px-4 *:py-3 *:rounded-t-md transition-all 
-                    duration-500 *:border-transparent *:border-b-2 border-t-2 border-b-2 border-white pt-10 pb-10 lg:pb-20 lg:px-6 justify-center *:flex
-                     *:items-center *:justify-start lg:*:justify-center`}>
+                <div className={`w-full grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 gap-5 *:font-normal *:text-lg *:px-4 *:py-3 *:rounded-t-md transition-all 
+                    duration-500 *:border-transparent *:border-b-2 border-t-2 border-b-2 border-white pt-10 pb-10 lg:pb-20 
+                    px-2 lg:px-6 justify-start xs:justify-center *:!w-full *:flex *:items-center *:justify-start lg:*:justify-center`}>
                     <CustomLinkMain href={`/`} className='hover:border-gray-400 hover:bg-gray-700 hover:shadow-2xl hover:shadow-gray-500'>Home</CustomLinkMain>
                     <CustomLinkMain href={`/search?neighborhood=All Neighborhoods&move_in=${moment(moment().add(1, "day")).format("YYYY-MM-DD")}&move_out=${moment(moment().add(32, "days")).format("YYYY-MM-DD")}&map_bounds=${JSON.stringify({ north: 42.60242525588096, south: 42.171848287543746, east: -70.73319879101562, west: -71.38688531445312 })}`} className='hover:border-gray-400 hover:bg-gray-700 hover:shadow-2xl hover:shadow-gray-500'>Discover Dens</CustomLinkMain>
                     <CustomLinkMain href={`/about-us`} className='hover:border-gray-400 hover:bg-gray-700 hover:shadow-2xl hover:shadow-gray-500'>Our Story</CustomLinkMain>

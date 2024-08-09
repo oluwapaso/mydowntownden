@@ -19,6 +19,10 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import Pagination from "@/components/pagination";
 import UserPropertyCard from "@/components/UserPropertyCard";
 import MapContainer from "@/components/MapContainer";
+import { FaTimes } from "react-icons/fa";
+import { IoClose } from "react-icons/io5";
+import { RiEqualizer2Line } from "react-icons/ri";
+import { FaList, FaMap } from "react-icons/fa6";
 
 const helper = new Helpers();
 export default function SearchPage() {
@@ -403,27 +407,40 @@ export default function SearchPage() {
     })
   }
 
+  const updateView = (view: string) => {
+    const curr_payload = { ...payload }
+    setPayload(() => {
+      return {
+        ...curr_payload,
+        mobile_view: view
+      }
+    })
+    setMobileView(view);
+  }
+
   return (
     <main className="flex min-h-screen flex-col items-center">
       <NavBar page="Search" />
-      <section className="w-full bg-white grid grid-cols-2 pt-[92px]">
+
+      <section className="w-full bg-white grid grid-cols-1 lg:grid-cols-2 pt-[92px]">
         <div className="flex flex-col py-5 px-5">
-          <div className="w-full flex justify-between items-center">
-            <div className="relative">
-              <div className="flex items-center select-none relative">
-                <div className="px-4 py-1 mr-2 cursor-pointer border border-gray-300 flex items-center rounded-2xl hover:shadow-md
-                 space-x-2" onClick={() => handleMenuBox("search_shown")} >
-                  <BiSearch size={16} /> <span className="font-medium">{payload.neighborhood}</span>
-                  <span className="font-medium text-gray-400">|</span>
-                  <span className="font-medium">
+          <div className="w-full flex flex-col lg:flex-row lg:justify-between lg:items-center space-y-3 lg:space-y-0">
+            <div className="w-full relative">
+
+              <div className="flex items-center justify-between select-none relative">
+                <div className="flex-grow px-4 py-2 mr-2 cursor-pointer border border-gray-300 flex flex-col xs:flex-row xs:items-center 
+                rounded-2xl hover:shadow-md space-x-2" onClick={() => handleMenuBox("search_shown")} >
+                  <div className=" flex items-center"><BiSearch size={16} /> <span className="font-medium">{payload.neighborhood}</span></div>
+                  <span className="font-medium text-gray-400 hidden xs:block">|</span>
+                  <span className="font-normal text-sm xs:font-base lg:font-medium">
                     {moment(payload.move_in).format("DD MMM")} - {moment(payload.move_out).format("DD MMM")}
                   </span>
                 </div>
 
-                <div className="px-4 py-1 cursor-pointer border border-gray-300 flex items-center rounded-2xl hover:shadow-md relative"
+                <div className="px-4 py-[18px] xs:py-2 cursor-pointer border border-gray-300 flex items-center rounded-2xl hover:shadow-md relative"
                   onClick={() => handleMenuBox("filters_shown")}>
-                  <BiAnalyse size={16} className='mr-1' />
-                  <span className="">
+                  <RiEqualizer2Line size={16} className='' />
+                  <span className="hidden 2xs:block ml-1 2xs:ml-0">
                     <span>Filters</span>
                     <span className="absolute size-6 p-2 rounded-full bg-sky-700 text-white text-sm font-medium -top-3 -right-2
                      flex items-center justify-center">
@@ -432,8 +449,8 @@ export default function SearchPage() {
                   </span>
                 </div>
 
-                <div className={`absolute top-0 left-0 rounded duration-300 ransition-all z-30 ${box_state.search_shown
-                  ? "p-0 min-w-full w-[45vw] h-[600px] border border-gray-500 shadow-2xl overflow-x-hidden overflow-y-auto"
+                <div className={`fixed lg:absolute -top-[10px] lg:top-0 left-0 rounded duration-300 ransition-all z-[100] ${box_state.search_shown
+                  ? "p-0 min-w-full w-[100dvw] lg:w-[45vw] h-[100dvh] lg:h-[600px] lg:border lg:border-gray-300 shadow-2xl overflow-x-hidden overflow-y-auto"
                   : "w-0 min-w-0 !h-0 overflow-hidden"}`} ref={searchBoxRef}>
                   <SearchPageSearchBox payload={payload} search_shown={box_state.search_shown} handleMenuBox={handleMenuBox} />
                 </div>
@@ -511,13 +528,22 @@ export default function SearchPage() {
 
 
 
-        <div className="map-box h-[calc(100vh-92px)] sticky top-[92px] z-10">
+        <div className="map-box hidden lg:block h-[calc(100vh-92px)] sticky top-[92px] z-10">
           <div className={`h-full col-span-full tab:col-span-3 lg:col-span-4 lgScrn:col-span-3 ${map_view_cntrl}`}>
             {(mobileView == "Map" && googleMapKey != "") && <MapContainer zoom={payload.zoom} setPayload={setPayload} payload={payload}
               properties={properties} initialLoad={initialLoad} setInitialLoad={setInitialLoad} setPolyLists={setPolyLists}
               api_key={googleMapKey} priceWithUtil={priceWithUtil} />
             }
           </div>
+        </div>
+
+        <div className='w-full fixed top-[85dvh] flex justify-center *:flex *:px-4 *:py-3 *:bg-gray-100 text-sm z-[45] 
+        *:drop-shadow-md *:items-center pointer-events-none tab:hidden *:border *:border-gray-300'>
+          <button className={`${mobileView == "Map" && "!bg-primary text-white"} rounded-l-md pointer-events-auto`}
+            onClick={() => { updateView("Map"); setInitialLoad(true); }}><FaMap size={14} /> <span className='ml-1'>Map</span></button>
+          <button className={`${mobileView == "List" && "!bg-primary text-white"} rounded-r-md pointer-events-auto`}
+            onClick={() => { updateView("List"); setInitialLoad(true); }}>
+            <FaList size={14} /> <span className='ml-1'>List</span></button>
         </div>
       </section>
     </main >

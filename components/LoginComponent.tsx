@@ -51,11 +51,16 @@ const LoginComponent = ({ page, redirect, handleForgotPwrdModal, handleSignupMod
                 }
             } else {
 
+                toast.success("Logged in successfully", {
+                    position: "top-center",
+                    theme: "colored"
+                });
+
                 if (closeModal) {
-                    console.log("Here 2")
                     closeModal;
                     closeModal();
                 }
+
             }
 
         } else {

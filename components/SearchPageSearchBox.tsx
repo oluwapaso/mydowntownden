@@ -13,6 +13,8 @@ import { format } from 'date-fns';
 import { DateRange } from 'react-date-range';
 import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
+import { IoClose } from 'react-icons/io5';
+import useCurrentBreakpoint from '@/_hooks/useMediaQuery';
 
 const helpers = new Helpers();
 const SearchPageSearchBox = ({ payload, search_shown, handleMenuBox }: {
@@ -23,6 +25,14 @@ const SearchPageSearchBox = ({ payload, search_shown, handleMenuBox }: {
     const dispatch = useDispatch();
     const currentDate = new Date();
     const inputRef = useRef<HTMLInputElement | null>(null);
+    const whereBoxRef = useRef<HTMLDivElement>(null);
+    const dateBoxRef = useRef<HTMLDivElement>(null);
+
+    const { is1Xm, is2Xm, isXs, isSm, isMd, isTab } = useCurrentBreakpoint();
+    let calendar_dir: "vertical" | "horizontal" | undefined = "horizontal";
+    if (is1Xm || is2Xm || isXs || isSm || isMd) {
+        calendar_dir = "vertical";
+    }
 
     // Add 1 day to the current date
     const minDate = new Date();
@@ -167,6 +177,7 @@ const SearchPageSearchBox = ({ payload, search_shown, handleMenuBox }: {
 
     const setSelectedCity = (city: string) => {
         setPropertyCity(city);
+        setCityBoxShown(false);
     }
 
     const searchProperties = () => {
@@ -229,100 +240,122 @@ const SearchPageSearchBox = ({ payload, search_shown, handleMenuBox }: {
         }
     }, [search_shown]);
 
+    useEffect(() => {
+        const handleClickOutside = (e: MouseEvent) => {
+            if (whereBoxRef.current && !whereBoxRef.current.contains(e.target as Node)) {
+                setCityBoxShown(false);
+            }
+            if (dateBoxRef.current && !dateBoxRef.current.contains(e.target as Node)) {
+                setRangeShown(false);
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [whereBoxRef, dateBoxRef]);
+
     return (
-        <div className="srch_page w-full bg-white grid grid-cols-4 relative h-full">
+        <div className="srch_page w-full bg-white relative h-full">
+            <div className="w-full flex lg:hidden justify-between px-4 py-3 items-center">
+                <IoClose size={25} onClick={() => handleMenuBox("search_shown")} />
+                <span className="ml-2">Find your new home</span> <span></span>
+            </div>
 
-            <div className="borderr border-r-00 border-gray400 flex flex-col py-3 px-3 rounded-l-lg h-[105px]">
-                <div className="font-medium text-gray-500">Where?</div>
-                <div className="">
-                    <input type="text" name="property_city" value={property_city} autoComplete="off" className="w-full px-3 pl-0 py-3 h-[55px] outline-none focus:outline-none text-base placeholder:text-sm"
-                        placeholder="Search for a city" ref={inputRef} onChange={searchCity} onFocus={() => { showCityBox() }} />
-                    {
-                        city_box_shown && <div className="absolute w-full left-0 top-[99px] bg-white p-6 borderr border-t-0o 
-                        border-gray-4000 flex flex-col rounded-b-lg">
-                            <h1 className="w-full font-semibod text-xl">Boston Neighborhoods</h1>
-                            <div className='w-full h-autoX max- h-[300px] overflow-x-hidden overflow-y-auto'>
-                                <div className="grid grid-cols-3 gap-x-5 *:cursor-pointer *:font-normal *:w-full *:px-3 *:py-4 *:border-b-2 
-                                *:border-transparent *:text-gray-700">
-                                    {
-                                        !cities_loaded &&
-                                        <div className=" col-span-full w-full h-[200px] flex items-center justify-center">
-                                            <AiOutlineLoading3Quarters size={25} className="animate-spin" />
-                                        </div>
-                                    }
-
-                                    {
-                                        cities_loaded && (
-                                            <div className="hover:border-gray-500" onClick={() => setSelectedCity("All Neighborhoods")}>
-                                                {property_city == "All Neighborhoods"
-                                                    ? <b>All Neighborhoods</b>
-                                                    : <>All Neighborhoods</>
-                                                }
+            <div className="w-full bg-white grid grid-cols-1 lg:grid-cols-4 relative-h-full">
+                <div ref={whereBoxRef} className="flex flex-col py-3 px-3 rounded-l-lg h-[105px]">
+                    <div className="font-medium text-gray-500">Where?</div>
+                    <div className="">
+                        <input type="text" name="property_city" value={property_city} autoComplete="off" className="w-full px-3 pl-0 py-3 h-[55px] outline-none focus:outline-none text-base placeholder:text-sm"
+                            placeholder="Search for a city" ref={inputRef} onChange={searchCity} onFocus={() => { showCityBox() }} />
+                        {
+                            city_box_shown && <div className="absolute w-full left-0 top-[148px] lg:top-[99px] bg-white p-6 flex 
+                            flex-col rounded-lg border border-gray-400 shadow-2xl lg:border-0 lg:shadow-none">
+                                <h1 className="w-full font-semibod text-xl">Boston Neighborhoods</h1>
+                                <div className='w-full h-[65dvh] lg:h-[300px] overflow-x-hidden overflow-y-auto
+                                 xl:border-0'>
+                                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-5 *:cursor-pointer *:font-normal *:w-full *:px-3 *:py-4 
+                                    *:border-b-2 *:border-transparent *:text-gray-700">
+                                        {
+                                            !cities_loaded &&
+                                            <div className=" col-span-full w-full h-[200px] flex items-center justify-center">
+                                                <AiOutlineLoading3Quarters size={25} className="animate-spin" />
                                             </div>
-                                        )
-                                    }
+                                        }
 
-                                    {
-                                        cities_loaded && (
-                                            cities_lists.map((city, index) => {
-                                                const raw_city = city;
-                                                if (property_city && property_city != "") {
-                                                    city = city.replace(new RegExp(property_city, "i"), (match) => `<b>${match}</b>`);
-                                                }
+                                        {
+                                            cities_loaded && (
+                                                <div className="hover:border-gray-500" onClick={() => setSelectedCity("All Neighborhoods")}>
+                                                    {property_city == "All Neighborhoods"
+                                                        ? <b>All Neighborhoods</b>
+                                                        : <>All Neighborhoods</>
+                                                    }
+                                                </div>
+                                            )
+                                        }
 
-                                                return <div key={index} className="hover:border-gray-500" onClick={() => setSelectedCity(raw_city)}
-                                                    dangerouslySetInnerHTML={{ __html: city }} />
-                                            })
-                                        )
-                                    }
+                                        {
+                                            cities_loaded && (
+                                                cities_lists.map((city, index) => {
+                                                    const raw_city = city;
+                                                    if (property_city && property_city != "") {
+                                                        city = city.replace(new RegExp(property_city, "i"), (match) => `<b>${match}</b>`);
+                                                    }
+
+                                                    return <div key={index} className="hover:border-gray-500" onClick={() => setSelectedCity(raw_city)}
+                                                        dangerouslySetInnerHTML={{ __html: city }} />
+                                                })
+                                            )
+                                        }
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    }
+                        }
 
+                    </div>
                 </div>
-            </div>
 
-            <div className="borderr border-x-00 border-gray400 flex flex-col py-3 px-3 h-[105px]">
-                <div className="font-medium text-gray-500">Move-in</div>
-                <div>
-                    <input type="text" name="move_in" value={move_in} className="w-full px-3 pl-0 py-3 h-[55px] outline-none focus:outline-none text-base placeholder:text-sm"
-                        placeholder="Select a date" onClick={() => { showDateRange() }} />
+                <div className="borderr border-x-00 border-gray400 flex flex-col py-3 px-3 h-[105px]">
+                    <div className="font-medium text-gray-500">Move-in</div>
+                    <div>
+                        <input type="text" name="move_in" value={move_in} className="w-full px-3 pl-0 py-3 h-[55px] outline-none focus:outline-none text-base placeholder:text-sm"
+                            placeholder="Select a date" onClick={() => { showDateRange() }} />
+                    </div>
                 </div>
-            </div>
 
-            <div className="borderr border-x-00 border-gray400 flex flex-col py-3 px-3 h-[105px]">
-                <div className="font-medium text-gray-500">Move-out</div>
-                <div className="right-0">
-                    <input type="text" name="move_out" value={move_out} className="w-full px-3 pl-0 py-3 h-[55px] outline-none focus:outline-none text-base placeholder:text-sm"
-                        placeholder="Select a date" onClick={() => { showDateRange() }} />
+                <div ref={dateBoxRef} className="borderr border-x-00 border-gray400 flex flex-col py-3 px-3 h-[105px]">
+                    <div className="font-medium text-gray-500">Move-out</div>
+                    <div className="right-0">
+                        <input type="text" name="move_out" value={move_out} className="w-full px-3 pl-0 py-3 h-[55px] outline-none focus:outline-none text-base placeholder:text-sm"
+                            autoComplete='off' placeholder="Select a date" onClick={() => { showDateRange() }} />
 
-                    {range_shown && <DateRange
-                        editableDateInputs={false} className="w-full z-50 right-[0%] absolute top-[95px] borderr border-gray400 
-                        border-t-0 rounded-b-lg"
-                        onChange={(item) => setDates([item.selection])}
-                        showPreview={false}
-                        moveRangeOnFirstSelection={false}
-                        ranges={dates}
-                        months={2}
-                        direction="horizontal"
-                        maxDate={futureDate}
-                        minDate={minDate}
-                        //disabledDates={disabled_dates}
-                        dayContentRenderer={customDayContent}
-                    />
-                    }
+                        {range_shown && <DateRange
+                            editableDateInputs={false} className="w-full z-50 right-[0%] absolute top-[50px] xl:top-[95px] 
+                            border border-gray-400 lg:border-0 rounded-lg shadow-2xl lg:shadow-none"
+                            onChange={(item) => setDates([item.selection])}
+                            showPreview={false}
+                            moveRangeOnFirstSelection={false}
+                            ranges={dates}
+                            months={2}
+                            direction={calendar_dir}
+                            maxDate={futureDate}
+                            minDate={minDate}
+                            //disabledDates={disabled_dates}
+                            dayContentRenderer={customDayContent}
+                        />
+                        }
 
+                    </div>
                 </div>
-            </div>
 
-            <div className="borderr border-l-00 border-gray400 flex flex-col py-3 px-3 rounded-r-lg h-[105px] justify-center">
-                <div className="flex items-center justify-center px-4 py-4 bg-secondary text-white hover:shadow-lg 
+                <div className="borderr border-l-00 border-gray400 flex flex-col py-3 px-3 rounded-r-lg h-[105px] justify-center">
+                    <div className="flex items-center justify-center px-4 py-4 bg-secondary text-white hover:shadow-lg 
                     hover:shadow-gray-400 cursor-pointer rounded select-none" onClick={searchProperties}>
-                    <BiSearch size={16} className='mr-1' /> <span>Search</span>
+                        <BiSearch size={16} className='mr-1' /> <span>Search</span>
+                    </div>
                 </div>
             </div>
-
         </div>
     )
 }

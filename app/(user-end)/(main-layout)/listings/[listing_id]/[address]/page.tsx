@@ -42,6 +42,7 @@ import { toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';
 import { showPageLoader } from '../../../GlobalRedux/app/appSlice';
 import { useDispatch } from 'react-redux';
+import useCurrentBreakpoint from '@/_hooks/useMediaQuery';
 
 const helper = new Helpers();
 const PropertyDetails = () => {
@@ -148,7 +149,7 @@ const PropertyDetails = () => {
     const [page_error, setPageError] = useState("");
     const [gallery, setGallery] = useState<React.JSX.Element>(<div className='col-span-2 bg-white flex items-center justify-center h-full'><AiOutlineLoading3Quarters size={30} className='animate-spin' /></div>);
     const [showGallery, setShowGallery] = useState(false);
-    const [initialSlide, setInitialSlide] = useState(1);
+    const [initialSlide, setInitialSlide] = useState(0);
     const [activeDivId, setActiveDivId] = useState<string | null>(null);
     const [current_type, setCurrentType] = useState("");
     const [places_loading, setPlacesLoading] = useState(false);
@@ -861,7 +862,7 @@ const PropertyDetails = () => {
                                     {(prop.pets_allowed == "Yes" || prop.parking_available != "No") &&
                                         <div className='section w-full mt-14' id='add_ons'>
                                             <h1 className='w-full text-3xl mb-2'>Available add-ons</h1>
-                                            <div className='w-full flex space-x-6'>
+                                            <div className='w-full flex flex-col 2xs:flex-row 2xs:space-x-6'>
 
                                                 {prop.parking_available != "No" && <ParkingBox payload={payload} prop={prop} />}
                                                 {prop.pets_allowed == "Yes" && <PetsBox payload={payload} prop={prop} />}
@@ -967,10 +968,10 @@ const PropertyDetails = () => {
                                 <div className='lg:col-span-2'>
                                     <div className='w-full relative h-full mx-auto max-w-[650px] lg:max-w-[100%]'>
 
-                                        <div className='w-full p-6 bg-white rounded-2xl drop-shadow-xl border border-gray-300 lg:sticky lg:top-24 lg:z-[2]'>
+                                        <div className='w-full p-4 lg:p-6 bg-white rounded-2xl drop-shadow-xl border border-gray-300 lg:sticky lg:top-24 lg:z-[2]'>
 
                                             <div className='w-full bg-white border border-gray-300 rounded-md relative cursor-pointer'>
-                                                <div className=' px-5 py-4 flex items-center'
+                                                <div className=' px-3 lg:px-5 py-4 flex items-center'
                                                     onClick={() => setDatepickerShown(true)}>
                                                     <div className=' flex-grow flex flex-col'>
                                                         <span className=' text-sm'>{stay_summary}</span>
@@ -986,7 +987,7 @@ const PropertyDetails = () => {
                                                 </div>
 
                                                 <div className={`absolute top-0 right-0 rounded duration-300 ransition-all z-30 ${datepicker_shown
-                                                    ? "p-0 min-w-full w-[45vw] h-[450px] border border-gray-500 shadow-2xl overflow-x-hidden overflow-y-auto"
+                                                    ? "p-0 min-w-full w-[45vw] h-[80vh] xs:h-[450px] border border-gray-500 shadow-2xl overflow-x-hidden overflow-y-auto"
                                                     : "w-0 min-w-0 !h-0 overflow-hidden"}`} ref={datepickerBoxRef}>
                                                     <ReserveDatePicker payload={payload} datepicker_shown={datepicker_shown}
                                                         setDatepickerShown={setDatepickerShown} />

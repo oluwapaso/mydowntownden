@@ -11,6 +11,7 @@ import { format } from 'date-fns';
 import { DateRange } from 'react-date-range';
 import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
+import useCurrentBreakpoint from '@/_hooks/useMediaQuery';
 
 const helpers = new Helpers();
 const ReserveDatePicker = ({ payload, datepicker_shown, setDatepickerShown }: {
@@ -21,6 +22,12 @@ const ReserveDatePicker = ({ payload, datepicker_shown, setDatepickerShown }: {
     const dispatch = useDispatch();
     const currentDate = new Date();
     const inputRef = useRef<HTMLInputElement | null>(null);
+
+    const { is1Xm, is2Xm, isXs, isSm, isMd, isTab } = useCurrentBreakpoint();
+    let calendar_dir: "vertical" | "horizontal" | undefined = "horizontal";
+    if (is1Xm || is2Xm) {
+        calendar_dir = "vertical";
+    }
 
     // Add 1 day to the current date
     const minDate = new Date();
@@ -166,9 +173,9 @@ const ReserveDatePicker = ({ payload, datepicker_shown, setDatepickerShown }: {
     }, [datepicker_shown]);
 
     return (
-        <div className="srch_page w-full bg-white grid grid-cols-3 relative h-full">
+        <div className="srch_page w-full bg-white grid grid-cols-1 xs:grid-cols-3 relative xs:h-full">
 
-            <div className="borderr border-x-00 border-gray400 flex flex-col py-3 px-3 h-[105px]">
+            <div className="flex flex-col py-3 px-3 h-[105px]">
                 <div className="font-medium text-gray-500">Move-in</div>
                 <div className='border-b border-gray-300'>
                     <input type="text" name="move_in" value={move_in} className="w-full px-3 pl-0 py-3 h-[55px] outline-none focus:outline-none text-base placeholder:text-sm"
@@ -176,21 +183,21 @@ const ReserveDatePicker = ({ payload, datepicker_shown, setDatepickerShown }: {
                 </div>
             </div>
 
-            <div className="borderr border-x-00 border-gray400 flex flex-col py-3 px-3 h-[105px]">
+            <div className=" flex flex-col py-3 px-3 h-[105px]">
                 <div className="font-medium text-gray-500">Move-out</div>
                 <div className="right-0 border-b border-gray-300">
                     <input type="text" name="move_out" value={move_out} className="w-full px-3 pl-0 py-3 h-[55px] outline-none focus:outline-none text-base placeholder:text-sm"
                         placeholder="Select a date" onClick={() => { showDateRange() }} />
 
                     {range_shown && <DateRange
-                        editableDateInputs={false} className="w-full z-50 right-[0%] absolute top-[95px] borderr border-gray400 
+                        editableDateInputs={false} className="w-full z-50 right-[0%] absolute top-[300px] xs:top-[95px] 
                         border-t-0 rounded-b-lg"
                         onChange={(item) => setDates([item.selection])}
                         showPreview={false}
                         moveRangeOnFirstSelection={false}
                         ranges={dates}
                         months={2}
-                        direction="horizontal"
+                        direction={calendar_dir}
                         maxDate={futureDate}
                         minDate={minDate}
                         //disabledDates={disabled_dates}

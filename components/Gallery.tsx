@@ -7,6 +7,11 @@ import "slick-carousel/slick/slick-theme.css";
 
 function Gallery({ photos, show, closeGallery, initialSlide }: { photos: any[], show: boolean, closeGallery: () => void, initialSlide: number }) {
 
+    let infinite = false;
+    if (photos.length > 1) {
+        infinite = true;
+    }
+
     const settings = {
         dots: true,
         arrows: true,
@@ -15,7 +20,7 @@ function Gallery({ photos, show, closeGallery, initialSlide }: { photos: any[], 
         slidesToScroll: 1,
         autoplay: false,
         focusOnSelect: true,
-        infinite: true,
+        infinite: infinite,
         initialSlide: initialSlide
     };
 
@@ -25,7 +30,7 @@ function Gallery({ photos, show, closeGallery, initialSlide }: { photos: any[], 
             <div key={index} className='relative flex items-center justify-center'>
                 <img src={`${(image && image != "") ? image : "/no-blog-image-added.png"}`} alt={`Alt here`}
                     onError={(e: any) => { e.target.onerror = null; e.target.src = `/no-blog-image-added.png`; }}
-                    className={`w-auto h-[70vh] m-auto`}
+                    className={`w-auto h-[40vh] md:h-[60vh] lg:h-[70vh] m-auto`}
                 />
             </div>
         ));
@@ -47,7 +52,7 @@ function Gallery({ photos, show, closeGallery, initialSlide }: { photos: any[], 
                       z-20 duration-300" onClick={closeGallery}>
                         <MdClose size={35} className="font-bold text-white" />
                     </div>
-                    <div className="z-10 flex items-center w-full h-[70vh] mt-2 mb-2 relative">
+                    <div className="z-10 flex items-center w-full h-[40vh] md:h-[60vh] lg:h-[70vh] mt-2 mb-2 relative overflow--hidden">
                         <div className="absolute w-full h-full">
                             <Slider {...settings} lazyLoad="ondemand" className="w-full">
                                 {slides}

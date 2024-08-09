@@ -36,7 +36,7 @@ const ReserveApartment = () => {
     const pets = searchParams?.get('pets');
     const parkings = searchParams?.get('parkings');
 
-    const { data: session } = useSession();
+    const { data: session, status } = useSession();
     const user = session?.user as any;
 
     const empty_form_data = {
@@ -87,6 +87,14 @@ const ReserveApartment = () => {
     const diffInDays = moment(move_out).diff(moment(move_in), 'days');
     const [total_staying_days, setTotalStayingDays] = useState(diffInDays);
     const [isSubmitting, setIsSubmitting] = useState(false);
+
+    useEffect(() => {
+
+        if (!session?.user && status != "loading") {
+            window.location.href = "/login";
+        }
+
+    }, [session, status]);
 
     useEffect(() => {
         if (property_id) {
@@ -362,7 +370,7 @@ const ReserveApartment = () => {
                 <>
 
                     <div className='w-full py-10'>
-                        <div className='container m-auto max-w-[1250px] px-3 xl:px-0'>
+                        <div className='container m-auto max-w-[650px] lg:max-w-[1250px] px-3 xl:px-0'>
                             <div className='w-full grid grid-cols-1 lg:grid-cols-5 gap-20'>
 
                                 <div className='lg:col-span-3'>

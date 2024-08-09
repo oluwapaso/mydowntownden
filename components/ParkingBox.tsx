@@ -23,7 +23,7 @@ const ParkingBox = ({ payload, prop }: { payload: { [key: string]: any }, prop: 
 
     return (
         <>
-            <div className={` border border-gray-300 drop-shadow-xl cursor-pointer px-4 py-6 flex flex-col justify-between 
+            <div className={`mb-5 2xs:mb-0 border border-gray-300 drop-shadow-xl cursor-pointer px-4 py-6 flex flex-col justify-between 
             items-center rounded-md min-w-[180px] ${payload.parkings > 0 ? "bg-sky-100" : "bg-white"}`} onClick={openModal}>
                 <div className=' flex flex-col items-center justify-center'>
                     <img src='/map-icon-parking.svg' width={10} height={10} className=' w-7 h-7' /><div className='w-full flex'></div>

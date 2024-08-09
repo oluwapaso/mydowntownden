@@ -179,6 +179,11 @@ input[type=number].appearance-none {
   width: 50% !important;
 }
 
+@media (max-width: 540px) {
+  .srch_page .rdrMonth {
+    width: 100% !important;
+  }
+}
 
 /** Google map info box starts **/
 /** Google map info box starts **/
