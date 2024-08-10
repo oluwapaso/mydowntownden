@@ -7,13 +7,14 @@ import useCurrentBreakpoint from '@/_hooks/useMediaQuery';
 import CustomLinkMain from './CustomLinkMain';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
+import moment from 'moment';
 
 const PropCarousel = ({ images, defaultpic, listing_id, address, page }:
     { images: any[], defaultpic?: string, listing_id: string, address: string, page?: string }) => {
 
     const searchParams = useSearchParams();
-    const move_in = searchParams?.get("move_in") as string;
-    const move_out = searchParams?.get("move_out") as string;
+    const move_in = searchParams?.get("move_in") || moment().add(1, 'day');
+    const move_out = searchParams?.get("move_out") || moment().add(32, 'days');
 
     const slickSlider = useRef<HTMLDivElement>(null);
     const [transformCount, setTransformCount] = useState(0);
