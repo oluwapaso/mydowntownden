@@ -13,8 +13,8 @@ const PropCarousel = ({ images, defaultpic, listing_id, address, page }:
     { images: any[], defaultpic?: string, listing_id: string, address: string, page?: string }) => {
 
     const searchParams = useSearchParams();
-    const move_in = searchParams?.get("move_in") || moment().add(1, 'day');
-    const move_out = searchParams?.get("move_out") || moment().add(32, 'days');
+    const move_in = searchParams?.get("move_in") || moment().add(1, 'day').format("YYYY-MM-DD");
+    const move_out = searchParams?.get("move_out") || moment().add(32, 'days').format("YYYY-MM-DD");
 
     const slickSlider = useRef<HTMLDivElement>(null);
     const [transformCount, setTransformCount] = useState(0);
