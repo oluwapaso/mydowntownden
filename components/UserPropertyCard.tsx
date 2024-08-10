@@ -20,8 +20,8 @@ const helpers = new Helpers();
 const UserPropertyCard = ({ prop, page, priceWithUtil }: { prop: any, page?: string, priceWithUtil: string }) => {
 
     const searchParams = useSearchParams();
-    const move_in = searchParams?.get("move_in") as string;
-    const move_out = searchParams?.get("move_out") as string;
+    const move_in = searchParams?.get("move_in") as string || moment().add(1, 'day');
+    const move_out = searchParams?.get("move_out") as string || moment().add(32, 'days');
 
     const diffInMinutes = moment().diff(moment(prop.MatrixModifiedDT), 'minutes');
     const { is1Xm, is2Xm, isXs } = useCurrentBreakpoint();
