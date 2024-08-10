@@ -115,7 +115,7 @@ function NavBar({ page }: NavProps) {
                             </div>
 
                             <div className='absolute hidden w-[220px] z-[200] bg-transparent group-hover:block pt-[24px] right-0'>
-                                <ul className='nav-menu bg-white'>
+                                <ul className='nav-menu bg-white shadow-2xl'>
                                     <CustomLinkMain href='/my-dashboard?tab=Favorites&status=Active&page=1' className='nav-menu-item'>
                                         <div className=' flex items-center px-4 py-3 hover:bg-gray-100'>Favorites {`(${logged_user?.favorites ? logged_user?.favorites.length : "0"})`}</div>
                                     </CustomLinkMain>
