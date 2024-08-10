@@ -1,6 +1,7 @@
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
+import FacebookProvider from "next-auth/providers/facebook";
 import { MYSQLCompanyRepo } from "@/_repo/company_repo";
 
 const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || '';
@@ -39,6 +40,10 @@ export const authConfig: NextAuthOptions = {
             }
         }),
         GoogleProvider({
+            clientId: "",
+            clientSecret: "",
+        }),
+        FacebookProvider({
             clientId: "",
             clientSecret: "",
         }),
@@ -81,17 +86,19 @@ export const authConfig: NextAuthOptions = {
 }
 
 // Update clientId and clientSecret asynchronously
-async function updateGoogleProvider() {
+async function updateProvidersInfo() {
 
     const compRepo = new MYSQLCompanyRepo();
     const clientCredentials = await compRepo.GetApiInfo();
     authConfig.providers[1].options.clientId = clientCredentials.data.google_auth_client_id;
     authConfig.providers[1].options.clientSecret = clientCredentials.data.google_auth_client_secret;
+    authConfig.providers[2].options.clientId = clientCredentials.data.facebook_auth_app_id;
+    authConfig.providers[2].options.clientSecret = clientCredentials.data.facebook_auth_app_secret;
     
 }
 
 // Call the update function
-updateGoogleProvider().then(() => {
+updateProvidersInfo().then(() => {
     console.log('Google provider updated successfully');
 }).catch((error) => {
     console.error('Failed to update Google provider:', error);

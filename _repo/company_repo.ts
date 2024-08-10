@@ -159,7 +159,7 @@ export class MYSQLCompanyRepo implements CompanyRepo {
             params.google_map_key, params.sendgrid_key, params.sendgrid_mailer, "1"]
             );
 
-            if(result.affectedRows > 0){
+            if(result.affectedRows >= 0){
                 
                 default_rep.success = true
                 default_rep.message = "API info successfully updated."
