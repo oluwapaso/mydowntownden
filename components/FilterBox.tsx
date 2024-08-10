@@ -434,7 +434,7 @@ const FilterBox = ({ payload, handleMenuBox, filters_shown }: {
                 <div className='w-full'>
                     <div className='w-full'>Beds</div>
                     <div className='w-full'>
-                        <div className='range-fieldsets grid grid-cols-[1fr_max-content_1fr] items-center'>
+                        <div className='range-fieldsets grid grid-cols-1 2xs:grid-cols-[1fr_max-content_1fr] gap-5 2xs:gap-0 items-center'>
                             <div className=''>
                                 <FilterDropdown label='Minimum' name='min_bed' value={payload_filters.min_bed} options={filters.min_beds}
                                     onChange={(e) => {
@@ -442,7 +442,7 @@ const FilterBox = ({ payload, handleMenuBox, filters_shown }: {
                                         setMinMaxBeds(e.target.value, "Max");
                                     }} />
                             </div>
-                            <div className='px-4'>
+                            <div className='px-4 hidden 2xs:block'>
                                 <label className='w-full text-white hidden xl:block'>-</label>
                                 <div>-</div>
                             </div>
@@ -460,7 +460,7 @@ const FilterBox = ({ payload, handleMenuBox, filters_shown }: {
                 <div className='w-full mt-5'>
                     <div className='w-full'>Baths</div>
                     <div className='w-full'>
-                        <div className='range-fieldsets grid grid-cols-[1fr_max-content_1fr] items-center'>
+                        <div className='range-fieldsets grid grid-cols-1 2xs:grid-cols-[1fr_max-content_1fr] gap-5 2xs:gap-0 items-center'>
                             <div className=''>
                                 <FilterDropdown label='Minimum' name='min_bath' value={payload_filters.min_bath} options={filters.min_baths}
                                     onChange={(e) => {
@@ -468,7 +468,7 @@ const FilterBox = ({ payload, handleMenuBox, filters_shown }: {
                                         setMinMaxBath(e.target.value, "Max");
                                     }} />
                             </div>
-                            <div className='px-4'>
+                            <div className='px-4 hidden 2xs:block'>
                                 <label className='w-full text-white hidden xl:block'>-</label>
                                 <div>-</div>
                             </div>
@@ -487,12 +487,12 @@ const FilterBox = ({ payload, handleMenuBox, filters_shown }: {
                 <div className='w-full mt-5'>
                     <div className='w-full'>Price</div>
                     <div className='w-full'>
-                        <div className='range-fieldsets grid grid-cols-[1fr_max-content_1fr] items-center'>
+                        <div className='range-fieldsets grid grid-cols-1 2xs:grid-cols-[1fr_max-content_1fr] gap-5 2xs:gap-0 items-center'>
                             <div className=''>
                                 <FilterPriceInput label='Minimum' name='min_price' value={helpers.formatCurrency(payload_filters.min_price.toString())}
                                     onChange={(e) => { handleFilterChange(e); }} onBlur={(e) => { setMinMaxPrice(e.target.value, "Max"); }} />
                             </div>
-                            <div className='px-4'>
+                            <div className='px-4 hidden 2xs:block'>
                                 <label className='w-full text-white hidden xl:block'>-</label>
                                 <div>-</div>
                             </div>

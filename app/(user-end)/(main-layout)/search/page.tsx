@@ -423,8 +423,8 @@ export default function SearchPage() {
       <NavBar page="Search" />
 
       <section className="w-full bg-white grid grid-cols-1 lg:grid-cols-2 pt-[92px]">
-        <div className="flex flex-col py-5 px-5">
-          <div className="w-full flex flex-col lg:flex-row lg:justify-between lg:items-center space-y-3 lg:space-y-0">
+        <div className={`flex flex-col py-5 px-5  ${list_view_cntrl}`}>
+          <div className="w-full flex flex-col xl:flex-row-lg:justify-between-lg:items-center space-y-5">
             <div className="w-full relative">
 
               <div className="flex items-center justify-between select-none relative">
@@ -449,38 +449,51 @@ export default function SearchPage() {
                   </span>
                 </div>
 
-                <div className={`fixed lg:absolute -top-[10px] lg:top-0 left-0 rounded duration-300 ransition-all z-[100] ${box_state.search_shown
-                  ? "p-0 min-w-full w-[100dvw] lg:w-[45vw] h-[100dvh] lg:h-[600px] lg:border lg:border-gray-300 shadow-2xl overflow-x-hidden overflow-y-auto"
+                <div className={`fixed lg:absolute top-0 left-0 rounded duration-300 ransition-all z-[100] ${box_state.search_shown
+                  ? "p-0 min-w-full w-[100dvw] lg:w-[65dvw] max-w-[700px] h-[100dvh] lg:h-[600px] lg:border lg:border-gray-300 shadow-2xl overflow-x-hidden overflow-y-auto"
                   : "w-0 min-w-0 !h-0 overflow-hidden"}`} ref={searchBoxRef}>
                   <SearchPageSearchBox payload={payload} search_shown={box_state.search_shown} handleMenuBox={handleMenuBox} />
                 </div>
 
-                <div className={`absolute top-0 left-0 rounded duration-300 ransition-all z-30 ${box_state.filters_shown
-                  ? "p-0 min-w-full w-[45vw] h-[750px] border border-gray-500 shadow-2xl overflow-x-hidden overflow-y-auto"
+                <div className={`fixed lg:absolute top-0 left-0 rounded duration-300 ransition-all z-[100] ${box_state.filters_shown
+                  ? "p-0 min-w-full w-[100dvw] lg:w-[45vw] max-w-[700px] h-[100dvh] lg:h-[750px] lg:border lg:border-gray-500 shadow-2xl overflow-x-hidden overflow-y-auto"
                   : "w-0 min-w-0 !h-0 overflow-hidden"}`} ref={filtersBoxRef}>
                   <FilterBox payload={payload} handleMenuBox={handleMenuBox} filters_shown={box_state.filters_shown} />
                 </div>
               </div>
             </div>
 
-            <div className='relative z-[20]'>
-              <div className='flex items-center'>
-                <span className='mr-2'>Sort By:</span>
-                <button onClick={() => handleMenuBox("sort_shown")} className='flex items-center text-sky-900'>
-                  <span className=''>{filter_by}</span>
-                  <span className={`ml-1 ${box_state.sort_shown ? "rotate-180" : null}`}>
-                    <MdOutlineKeyboardArrowDown size={22} />
-                  </span>
-                </button>
+            <div className='relative z-[20] flex flex-col xs:flex-row justify-between xs:items-center space-y-3 xs:space-y-0'>
+
+              <div className="inline-flex items-center cursor-pointer" onClick={toggleUtilities} >
+                <input type="checkbox" className="sr-only peer" checked={priceWithUtil == "Yes" ? true : false} />
+                <div className="relative w-11 h-3 bg-gray-200 peer-focus:outline-none peer-focus:ring4 peer-focus:ring-blue300 
+              dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full 
+              rtl:peer-checked:after:translatex20 peer-checked:after:start-[10px] after:content-[''] after:absolute 
+              after:-top-[4px] after:-start-[4px] after:bg-white after:border-gray-400 after:border after:rounded-full 
+              after:h-5 after:w-5 after:transition-all after:shadow-md dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                <span className="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">Show prices with utilities</span>
               </div>
 
-              <div className={`w-[250px] left-0 sm:right-0 absolute bg-transparent ${box_state.sort_shown ? "block" : "hidden"}`}>
-                <div className='w-full bg-white m-0 mt-1 drop-shadow-lg rounded-lg *:cursor-pointer *:py-3 *:px-3'>
-                  <div className="w-full hover:bg-gray-50" onClick={() => handleSort("Date-ASC")}>Availability</div>
-                  <div className="w-full hover:bg-gray-50" onClick={() => handleSort("Price-DESC")}>Price (High)</div>
-                  <div className="w-full hover:bg-gray-50" onClick={() => handleSort("Price-ASC")}>Price (Low)</div>
-                  <div className="w-full hover:bg-gray-50" onClick={() => handleSort("Sqft-DESC")}>Size (High)</div>
-                  <div className="w-full hover:bg-gray-50" onClick={() => handleSort("Sqft-ASC")}>Size (Low)</div>
+              <div className=" relative">
+                <div className='flex items-center'>
+                  <span className='mr-2'>Sort By:</span>
+                  <button onClick={() => handleMenuBox("sort_shown")} className='flex items-center text-sky-900'>
+                    <span className=''>{filter_by}</span>
+                    <span className={`ml-1 ${box_state.sort_shown ? "rotate-180" : null}`}>
+                      <MdOutlineKeyboardArrowDown size={22} />
+                    </span>
+                  </button>
+                </div>
+
+                <div className={`w-[250px] left-0 xs:right-0  absolute bg-transparent ${box_state.sort_shown ? "block" : "hidden"}`}>
+                  <div className='w-full bg-white m-0 mt-1 drop-shadow-lg rounded-lg *:cursor-pointer *:py-3 *:px-3'>
+                    <div className="w-full hover:bg-gray-50" onClick={() => handleSort("Date-ASC")}>Availability</div>
+                    <div className="w-full hover:bg-gray-50" onClick={() => handleSort("Price-DESC")}>Price (High)</div>
+                    <div className="w-full hover:bg-gray-50" onClick={() => handleSort("Price-ASC")}>Price (Low)</div>
+                    <div className="w-full hover:bg-gray-50" onClick={() => handleSort("Sqft-DESC")}>Size (High)</div>
+                    <div className="w-full hover:bg-gray-50" onClick={() => handleSort("Sqft-ASC")}>Size (Low)</div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -488,20 +501,10 @@ export default function SearchPage() {
 
           <div className="w-full mt-4">
 
-            <div className="inline-flex items-center cursor-pointer" onClick={toggleUtilities} >
-              <input type="checkbox" className="sr-only peer" checked={priceWithUtil == "Yes" ? true : false} />
-              <div className="relative w-11 h-3 bg-gray-200 peer-focus:outline-none peer-focus:ring4 peer-focus:ring-blue300 
-              dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full 
-              rtl:peer-checked:after:translatex20 peer-checked:after:start-[10px] after:content-[''] after:absolute 
-              after:-top-[4px] after:-start-[4px] after:bg-white after:border-gray-400 after:border after:rounded-full 
-              after:h-5 after:w-5 after:transition-all after:shadow-md dark:border-gray-600 peer-checked:bg-blue-600"></div>
-              <span className="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">Show prices with utilities</span>
-            </div>
-
-            <div className='w-full mt-2 grid grid-cols-1 xs:grid-cols-2 tab:grid-cols-1 lgScrn:grid-cols-2 gap-y-4 gap-2 sm:gap-4 
+            <div className='w-full mt-2 grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-1 lgScrn:grid-cols-2 gap-y-4 gap-2 sm:gap-4 
             lg:gap-6 mx-auto max-w-[410px] xs:!max-w-[100%]'>
               {
-                isPropsLoading && (<div className='w-full flex justify-center items-center min-h-60 sm:col-span-full'>
+                isPropsLoading && (<div className='col-span-full flex justify-center items-center min-h-60'>
                   <AiOutlineLoading3Quarters size={35} className='animate-spin' />
                 </div>)
               }
@@ -511,7 +514,7 @@ export default function SearchPage() {
                   prop_lists.length > 0
                     ? (prop_lists.map((prop) => <UserPropertyCard key={prop.listing_id} prop={prop} page="Map"
                       priceWithUtil={priceWithUtil} />))
-                    : (<div className='w-full flex justify-center items-center min-h-60 sm:col-span-full'>
+                    : (<div className=' col-span-full flex justify-center items-center min-h-60'>
                       No results found.
                     </div>)
                   : ""
@@ -528,8 +531,8 @@ export default function SearchPage() {
 
 
 
-        <div className="map-box hidden lg:block h-[calc(100vh-92px)] sticky top-[92px] z-10">
-          <div className={`h-full col-span-full tab:col-span-3 lg:col-span-4 lgScrn:col-span-3 ${map_view_cntrl}`}>
+        <div className={`map-box hidden lg:block h-[calc(100vh-92px)] sticky top-[92px] z-10 ${map_view_cntrl}`}>
+          <div className={`h-full col-span-full tab:col-span-3 lg:col-span-4 lgScrn:col-span-3`}>
             {(mobileView == "Map" && googleMapKey != "") && <MapContainer zoom={payload.zoom} setPayload={setPayload} payload={payload}
               properties={properties} initialLoad={initialLoad} setInitialLoad={setInitialLoad} setPolyLists={setPolyLists}
               api_key={googleMapKey} priceWithUtil={priceWithUtil} />

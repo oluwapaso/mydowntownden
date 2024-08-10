@@ -263,7 +263,7 @@ const SearchPageSearchBox = ({ payload, search_shown, handleMenuBox }: {
                 <span className="ml-2">Find your new home</span> <span></span>
             </div>
 
-            <div className="w-full bg-white grid grid-cols-1 lg:grid-cols-4 relative-h-full">
+            <div className="w-full bg-white grid grid-cols-1 md:grid-cols-4 relative-h-full">
                 <div ref={whereBoxRef} className="flex flex-col py-3 px-3 rounded-l-lg h-[105px]">
                     <div className="font-medium text-gray-500">Where?</div>
                     <div className="">
