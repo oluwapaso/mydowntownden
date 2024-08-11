@@ -6,6 +6,8 @@ import nodemailer from 'nodemailer';
 import { MYSQLMailRepo } from "@/_repo/mail_repo"; 
 import { MYSQLAutoResponderRepo } from "@/_repo/auto_responder"; 
 import { MYSQLTemplateRepo } from "@/_repo/templates_repo";
+import { MYSQLRequestRepo } from "@/_repo/property_request";
+import { NextApiRequest } from "next";
 
 export class MailService {
 
@@ -147,6 +149,20 @@ export class MailService {
         
         return default_resp;
 
+    }
+
+    public async AddContactUsRequest(req: NextApiRequest):Promise<APIResponseProps>{
+
+        const req_repo = new MYSQLRequestRepo();
+        const is_added = await req_repo.AddContactUsRequest(req);
+
+        const default_resp = {
+            message: "",
+            data: {},
+            success: is_added,
+        }
+
+        return default_resp;
     }
 
 }   

@@ -9,6 +9,8 @@ export interface RequestRepo {
     LoadRequests(params: LoadRequestsParams): Promise<ProperyRequests[] | null>
     AcknowledgeRequest(params: AcknowledgeRequestParams) : Promise<boolean>
     AcknowledgeMultiRequests(request_ids: string) : Promise<boolean>
+    BookApartment(req: NextApiRequest): Promise<boolean>
+    AddContactUsRequest(req: NextApiRequest): Promise<boolean>
 }
 
 export class MYSQLRequestRepo implements RequestRepo {
@@ -119,6 +121,38 @@ export class MYSQLRequestRepo implements RequestRepo {
             connection = await pool.getConnection();
             const [result] = await connection.query<ResultSetHeader>(`INSERT INTO property_requests(user_id, property_id, request_type, 
                 request_info, date_added) VALUES (?, ?, ?, ?, ?) `, [user_id, property_id, "Reservation Request", request_body, date]);
+            if(result.affectedRows){
+                return true;
+            }else{
+                return false;
+            }
+
+        }catch(e: any){
+            console.log(e.sqlMessage)
+            return false;
+        }finally{
+            if (connection) { 
+                connection.release();
+            }
+        }
+
+    }
+
+    public async AddContactUsRequest(req: NextApiRequest): Promise<boolean> {
+         
+        const user_id = req.body.user_id;
+        const property_id = req.body.property_id;
+        const date = moment().format("YYYY-MM-DD HH:mm:ss");
+        let connection: PoolConnection | null = null;
+
+        let request_body: any = {...req.body};
+        request_body = JSON.stringify(request_body);
+
+        try{
+
+            connection = await pool.getConnection();
+            const [result] = await connection.query<ResultSetHeader>(`INSERT INTO property_requests(user_id, property_id, request_type, 
+                request_info, date_added) VALUES (?, ?, ?, ?, ?) `, [user_id, property_id, "Contact Request", request_body, date]);
             if(result.affectedRows){
                 return true;
             }else{

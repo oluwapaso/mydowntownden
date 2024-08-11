@@ -58,7 +58,7 @@ const ClonePropertyUnit = () => {
         latitude: "",
         longitude: "",
         year: "",
-        mls_number: "",
+        mls_number: helpers.generateUniqueMLSNumber(10, 5),
         pets_allowed: "Yes",
         max_num_of_pets: "1",
         each_pets_fee_per_month: "$0",
@@ -654,8 +654,8 @@ const ClonePropertyUnit = () => {
                                             placeholder='Enter year built' handleChange={handleChange} />
                                     </div>
                                     <div className='w-full'>
-                                        <FloatingInput name='mls_number' label='MLS #' type='number' required value={formData.mls_number}
-                                            placeholder='Enter MLS number' handleChange={handleChange} />
+                                        <FloatingInput name='mls_number' label='MLS #' required value={formData.mls_number}
+                                            placeholder='Enter MLS number' handleChange={handleChange} disabled_field />
                                     </div>
                                 </div>
 
@@ -703,7 +703,7 @@ const ClonePropertyUnit = () => {
                         <div className='font-semibold text-lg uppercase'>Exterior Features</div>
                         <small className='w-full text-sm'>Click items to select</small>
 
-                        <div className='w-full flex space-x-4 mt-3'>
+                        <div className='w-full flex flex-wrap *:mb-3 *:mr-3 mt-3'>
                             {exterior_features.map((feature, index) => (
                                 <span key={index} onClick={() => togglePill(feature, setPropExteriorFeatures)}
                                     className={`cursor-pointer px-3 py-1 rounded-full hover:shadow-xl border-2
@@ -717,7 +717,7 @@ const ClonePropertyUnit = () => {
                         <div className='font-semibold text-lg uppercase'>Amenities</div>
                         <small className='w-full text-sm'>Click items to select</small>
 
-                        <div className='w-full flex space-x-4 mt-3'>
+                        <div className='w-full flex flex-wrap *:mb-3 *:mr-3 mt-3'>
                             {amenities.map((feature, index) => (
                                 <span key={index} onClick={() => togglePill(feature, setPropAmenities)}
                                     className={`cursor-pointer px-3 py-1 rounded-full hover:shadow-xl border-2
@@ -869,7 +869,7 @@ const ClonePropertyUnit = () => {
 
                         <div className='w-full mt-3'>
                             <small className='w-full text-sm'>Click items to select</small>
-                            <div className='w-full flex space-x-4 mt-1'>
+                            <div className='w-full flex flex-wrap *:mb-3 *:mr-3 mt-1'>
                                 {apartment_rules.map((feature, index) => (
                                     <span key={index} onClick={() => togglePill(feature, setPropApartmentRules)}
                                         className={`cursor-pointer px-3 py-1 rounded-full hover:shadow-xl border-2

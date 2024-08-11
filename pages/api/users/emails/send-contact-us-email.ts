@@ -54,6 +54,8 @@ export default async function handler(req: NextApiRequest, resp: NextApiResponse
 
         try{
 
+            const is_added = await mail_service.AddContactUsRequest(req);
+
             const params: SendMailParams = {
                 user_id: req.body.user_id,
                 mailer: "Nodemailer",

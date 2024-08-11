@@ -11,7 +11,7 @@ function InteriorFeaturesPicker({ formData, unit_id, interior_features, toggleUn
             </div>
             <small className='w-full text-sm'>Click items to select</small>
 
-            <div className='w-full flex space-x-4 mt-3'>
+            <div className='w-full flex flex-wrap *:mb-3 *:mr-3 mt-3'>
                 {interior_features.map((feature, index) => (
                     <span key={index} onClick={() => toggleUnitPill(feature, unit_id, "interior_features")}
                         className={`cursor-pointer px-3 py-1 rounded-full hover:shadow-xl border-2 

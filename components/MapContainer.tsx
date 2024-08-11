@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState, useEffect, useRef } from 'react';
-import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
+import { GoogleMap, InfoWindow, Marker, useJsApiLoader } from '@react-google-maps/api';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import CustomMarker from './CustomMarker';
 import { GoPencil } from 'react-icons/go';
@@ -36,12 +36,22 @@ function MapContainer({ zoom, setPayload, handleSearch, payload, properties, ini
         api_key: string
     }) {
 
+    const landmarks = [
+        { lat: 42.3347657, lng: -71.0760368, name: "Boston Medical Center", address: "One Boston Medical Center Pl, Boston, MA 02118" },
+        { lat: 42.3357647, lng: -71.1101671, name: "Brigham Women’s Hospital", address: "75 Francis St, Boston, MA 02115" },
+        { lat: 42.3374933, lng: -71.110103, name: "Boston Children’s Hospital", address: "300 Longwood Ave, Boston, MA 02115" },
+        { lat: 42.3508521, lng: -71.0784711, name: "Mass General", address: "55 Fruit St, Boston, MA 02114" },
+        { lat: 42.3747905, lng: -71.1055732, name: "CHA Cambridge Hospital", address: "1493 Cambridge St, Cambridge, MA 02139" },
+        { lat: 42.3740577, lng: -71.1351835, name: "Mount Auburn Hospital", address: "330 Mt Auburn St, Cambridge, MA 02138" },
+    ]
+
     const router = useRouter();
     const dispatch = useDispatch();
     const searchParams = useSearchParams();
     const [mapCenter, setMapCenter] = useState(center);
     const mapRef = useRef<google.maps.Map | null>(null);
     const [poly, setPoly] = useState<google.maps.Polyline | null>(null);
+    const [selectedLandmark, setSelectedLandmark] = useState<any>(null);
 
     const [event_states, setEventsState] = useState({
         draw_poly: false,
@@ -400,6 +410,30 @@ function MapContainer({ zoom, setPayload, handleSearch, payload, properties, ini
                     Draw a shape around the region you would like to live in
                 </div>)
             }
+
+            {landmarks.map((landmark, index) => (
+                <Marker
+                    key={index}
+                    position={{ lat: landmark.lat, lng: landmark.lng }}
+                    icon={{
+                        url: "/medical.png",
+                        scaledSize: new window.google.maps.Size(30, 30), // Adjust the size of the icon
+                    }}
+                    title={landmark.name}
+                    onClick={() => setSelectedLandmark(landmark)} // Set the selected landmark when clicked
+                />
+            ))}
+
+            {selectedLandmark && (
+                <InfoWindow
+                    position={{ lat: selectedLandmark.lat, lng: selectedLandmark.lng }}
+                    onCloseClick={() => setSelectedLandmark(null)}>
+                    <div className='py-3 px-3 flex flex-col'>
+                        <h3 className='mb-2 font-medium'>{selectedLandmark.name}</h3>
+                        <p>{selectedLandmark.address}</p>
+                    </div>
+                </InfoWindow>
+            )}
 
             {groupedData.length && groupedData.map((prop) => (
                 <CustomMarker prop={prop} zoom_level={zoom} priceWithUtil={priceWithUtil} />

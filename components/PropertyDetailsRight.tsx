@@ -375,7 +375,7 @@ const PropertyDetailsRight = ({ prop, toast, setTotalReservations }:
                     <span><PiSwimmingPoolDuotone size={18} /></span> <span className='ml-2'>Amenities</span>
                 </div>
 
-                <div className='w-full font-semibold flex space-x-4 pl-7 py-4'>
+                <div className='w-full font-semibold flex flex-wrap *:mb-3 *:mr-3 pl-7 py-4'>
                     {
                         Array.isArray(prop.prop_amenities) && (
                             prop.prop_amenities.map((feature, index) => (
@@ -394,7 +394,7 @@ const PropertyDetailsRight = ({ prop, toast, setTotalReservations }:
                     <span><FaTools size={18} /></span> <span className='ml-2'>Equipments</span>
                 </div>
 
-                <div className='w-full font-semibold flex space-x-4 pl-7 py-4'>
+                <div className='w-full font-semibold flex flex-wrap *:mb-3 *:mr-3 pl-7 py-4'>
                     {
                         Array.isArray(prop.equipments) && (
                             prop.equipments.map((feature, index) => (
@@ -413,7 +413,7 @@ const PropertyDetailsRight = ({ prop, toast, setTotalReservations }:
                     <span><MdOutlineRoomPreferences size={18} /></span> <span className='ml-2'>Interior Features</span>
                 </div>
 
-                <div className='w-full font-semibold flex space-x-4 pl-7 py-4'>
+                <div className='w-full font-semibold flex flex-wrap *:mb-3 *:mr-3 pl-7 py-4'>
                     {
                         Array.isArray(prop.interior_features) && (
                             prop.interior_features.map((feature, index) => (
@@ -432,7 +432,7 @@ const PropertyDetailsRight = ({ prop, toast, setTotalReservations }:
                     <span><TbHomeEco size={18} /></span> <span className='ml-2'>Exterior Features</span>
                 </div>
 
-                <div className='w-full font-semibold flex space-x-4 pl-7 py-4'>
+                <div className='w-full font-semibold flex flex-wrap *:mb-3 *:mr-3 pl-7 py-4'>
                     {
                         Array.isArray(prop.prop_exterior_features) && (
                             prop.prop_exterior_features.map((feature, index) => (

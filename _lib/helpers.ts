@@ -933,4 +933,21 @@ export class Helpers {
         return undefined;
     }
 
+    public generateUniqueMLSNumber(nums: number, texts: number) {
+        const numbers = '012345678901234567890123456789012345678901234567890123456789';
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+        let result1 = '';
+        for (let i = 0; i < nums; i++) {
+            const randomIndex = Math.floor(Math.random() * numbers.length);
+            result1 += numbers[randomIndex];
+        }
+
+        let result2 = '';
+        for (let i = 0; i < texts; i++) {
+            const randomIndex = Math.floor(Math.random() * chars.length);
+            result2 += chars[randomIndex];
+        }
+        return result1+"-"+result2;
+    }
+
 }
