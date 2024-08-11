@@ -130,35 +130,37 @@ const AllAdmins = () => {
                 <PageTitle text="Agents" show_back={false} right_component={add_new_comp} />
                 <div className='h-[auto] relative box-border pb-10 mt-3'>
 
-                    <div className="w-full border border-gray-200 rounded-md overflow-hidden shadow-xl">
-                        {/* Header */}
-                        <div className={`bg-gray-100 grid ${table_grids} *:text-wrap *:break-all *:px-4 *:py-3 *:font-medium`}>
-                            <div className="cell-header">Name</div>
-                            <div className="cell-header">Email</div>
-                            <div className="cell-header">Phone</div>
-                            <div className="cell-header">Status</div>
-                            {(admin && admin.super_admin == "Yes") && (
-                                <div className="cell-header">Actions</div>
-                            )}
-                        </div>
+                    <div className="w-full max-w-[100%] overflow-hidden overflow-x-auto border border-gray-200 rounded-md shadow-xl">
+                        <div className='w-full min-w-[1000px]'>
+                            {/* Header */}
+                            <div className={`bg-gray-100 grid ${table_grids} *:text-wrap *:break-all *:px-4 *:py-3 *:font-medium`}>
+                                <div className="cell-header">Name</div>
+                                <div className="cell-header">Email</div>
+                                <div className="cell-header">Phone</div>
+                                <div className="cell-header">Status</div>
+                                {(admin && admin.super_admin == "Yes") && (
+                                    <div className="cell-header">Actions</div>
+                                )}
+                            </div>
 
-                        <div className='w-full divide-y divide-gray-200'>
-                            {/* Loader */}
-                            {!admin_fetched && <div className=' col-span-full h-[250px] bg-white flex items-center justify-center'>
-                                <AiOutlineLoading3Quarters size={30} className='animate animate-spin' />
-                            </div>}
-                            {/* Rows */}
-                            {
-                                admin_fetched && (
-                                    (agents.length && agents.length > 0)
-                                        ? (agents.map((admin) => {
-                                            return (<AdminListsCard key={admin.admin_id} prop={admin} handleDelete={handleDelete} />)
-                                        }))
-                                        : <div className='col-span-full h-[250px] bg-white flex items-center justify-center'>
-                                            No agents found.
-                                        </div>)
-                            }
+                            <div className='w-full divide-y divide-gray-200'>
+                                {/* Loader */}
+                                {!admin_fetched && <div className=' col-span-full h-[250px] bg-white flex items-center justify-center'>
+                                    <AiOutlineLoading3Quarters size={30} className='animate animate-spin' />
+                                </div>}
+                                {/* Rows */}
+                                {
+                                    admin_fetched && (
+                                        (agents.length && agents.length > 0)
+                                            ? (agents.map((admin) => {
+                                                return (<AdminListsCard key={admin.admin_id} prop={admin} handleDelete={handleDelete} />)
+                                            }))
+                                            : <div className='col-span-full h-[250px] bg-white flex items-center justify-center'>
+                                                No agents found.
+                                            </div>)
+                                }
 
+                            </div>
                         </div>
                     </div>
 

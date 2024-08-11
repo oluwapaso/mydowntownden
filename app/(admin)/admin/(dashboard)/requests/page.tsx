@@ -213,8 +213,8 @@ const AllRequests = () => {
         <div className='w-full flex flex-col'>
             <PageTitle text={type} show_back={false} />
             <div className='!w-full !max-w-[100%] h-[auto] relative box-border pb-10'>
-                <div className='w-full mt-8 flex justify-between'>
-                    <div className="relative">
+                <div className='w-full mt-8 flex flex-col xs:flex-row justify-between'>
+                    <div className="relative mr-auto">
 
                         {
                             params_type != "Completed Requests" ? <div className='flex items-center px-5 bg-zinc-900 text-white border 
@@ -229,7 +229,7 @@ const AllRequests = () => {
 
                     </div>
 
-                    <div className='ml-auto flex items-center'>
+                    <div className='mr-auto xs:ml-auto xs:mr-0 flex items-center self-start xs:self-end mt-3 xs:mt-0'>
                         <div className='flex items-center group px-3 bg-white border border-zinc-900 cursor-pointer h-[45px] rounded 
                             min-w-[100px] hover:shadow-xl *:font-semibold relative'>
                             <div className='flex justify-between w-full items-center'>
@@ -251,38 +251,40 @@ const AllRequests = () => {
                     </div>
                 </div>
 
-                <div className="w-full mt-3 border border-gray-200 rounded-md overflow-hidden shadow-xl">
-                    {/* Header */}
-                    <div className=" bg-gray-100 grid grid-cols-[minmax(50px,50px)_repeat(4,1fr)_minmax(180px,180px)] *:text-wrap *:break-all *:px-4 *:py-3 *:font-medium">
-                        <div className="cell-header flex items-center select-none">
-                            <input type="checkbox" className='styled-checkbox z-20' checked={isCheckAll} onChange={() => handleCheckAllChange()} />
-                            <label className='z-10 -left-4'></label>
+                <div className="w-full max-w-[100%] overflow-hidden overflow-x-auto mt-3 border border-gray-200 rounded-md shadow-xl">
+                    <div className='w-full min-w-[1000px]'>
+                        {/* Header */}
+                        <div className=" bg-gray-100 grid grid-cols-[minmax(50px,50px)_repeat(4,1fr)_minmax(180px,180px)] *:text-wrap *:break-all *:px-4 *:py-3 *:font-medium">
+                            <div className="cell-header flex items-center select-none">
+                                <input type="checkbox" className='styled-checkbox z-20' checked={isCheckAll} onChange={() => handleCheckAllChange()} />
+                                <label className='z-10 -left-4'></label>
+                            </div>
+                            <div className="cell-header">User</div>
+                            <div className="cell-header">Type</div>
+                            <div className="cell-header">Date</div>
+                            <div className="cell-header">Status</div>
+                            <div className="cell-header">Actions</div>
                         </div>
-                        <div className="cell-header">User</div>
-                        <div className="cell-header">Type</div>
-                        <div className="cell-header">Date</div>
-                        <div className="cell-header">Status</div>
-                        <div className="cell-header">Actions</div>
-                    </div>
 
-                    <div className='w-full divide-y divide-gray-200'>
-                        {/* Loader */}
-                        {!requests_fetched && <div className='col-span-full h-[250px] bg-white flex items-center justify-center'>
-                            <AiOutlineLoading3Quarters size={30} className='animate animate-spin' />
-                        </div>}
-                        {/* Rows */}
-                        {
-                            requests_fetched && (
-                                (requests.length && requests.length > 0)
-                                    ? (requests.map((request, index) => {
-                                        return (<RequestListCard key={`${request.request_id}-${index}`} prop={request} setCanLoad={setCanLoad}
-                                            checkedItems={checkedItems} handleCheckboxChange={handleCheckboxChange}
-                                            setShowModal={setShowModal} setClickedReqsuest={setClickedReqsuest} />)
-                                    }))
-                                    : <div className='col-span-full h-[250px] bg-white flex items-center justify-center'>
-                                        No requests found on this page.
-                                    </div>)
-                        }
+                        <div className='w-full divide-y divide-gray-200'>
+                            {/* Loader */}
+                            {!requests_fetched && <div className='col-span-full h-[250px] bg-white flex items-center justify-center'>
+                                <AiOutlineLoading3Quarters size={30} className='animate animate-spin' />
+                            </div>}
+                            {/* Rows */}
+                            {
+                                requests_fetched && (
+                                    (requests.length && requests.length > 0)
+                                        ? (requests.map((request, index) => {
+                                            return (<RequestListCard key={`${request.request_id}-${index}`} prop={request} setCanLoad={setCanLoad}
+                                                checkedItems={checkedItems} handleCheckboxChange={handleCheckboxChange}
+                                                setShowModal={setShowModal} setClickedReqsuest={setClickedReqsuest} />)
+                                        }))
+                                        : <div className='col-span-full h-[250px] bg-white flex items-center justify-center'>
+                                            No requests found on this page.
+                                        </div>)
+                            }
+                        </div>
                     </div>
                 </div>
 

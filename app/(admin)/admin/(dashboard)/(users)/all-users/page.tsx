@@ -205,8 +205,8 @@ const AllUsers = () => {
         <div className='w-full flex flex-col'>
             <PageTitle text="Users" show_back={false} />
             <div className='!w-full !max-w-[100%] h-[auto] relative box-border pb-10'>
-                <div className='w-full mt-8 flex justify-between'>
-                    <div className="relative w-full max-w-[450px]">
+                <div className='w-full mt-8 flex flex-col md:flex-row justify-between'>
+                    <div className="relative w-full md:max-w-[350px] tab:max-w-[450px] mr-0 xs:mr-3">
                         <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                             <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
@@ -220,9 +220,9 @@ const AllUsers = () => {
                         dark:hover:bg-blue-700 dark:focus:ring-blue-800 hover:shadow-lg" onClick={() => DoSearch(lead_stage)}>Search</button>
                     </div>
 
-                    <div className='ml-auto flex items-center'>
+                    <div className='mr-auto md:ml-auto flex items-center self-start md:self-end mt-3 md:mt-0'>
                         <div className='flex items-center group px-3 bg-white border border-zinc-900 cursor-pointer h-[45px] rounded 
-                            min-w-[100px] hover:shadow-xl *:font-semibold relative mr-2'>
+                            min-w-[100px] hover:shadow-xl *:font-semibold relative'>
                             <div className='flex justify-between w-full items-center'>
                                 <span>Lead Stage: {lead_stage}</span>
                                 <span className='group-hover:rotate-180 transition-all duration-300'>
@@ -230,7 +230,7 @@ const AllUsers = () => {
                                 </span>
                             </div>
 
-                            <div className='w-[240px] hidden group-hover:block absolute top-[105%] right-0 shadow-2xl rounded-md bg-white z-10'>
+                            <div className='w-[240px] hidden group-hover:block absolute top-[105%] left-0 md:right-0 shadow-2xl rounded-md bg-white z-10'>
                                 <div className='w-full flex flex-col max-h-[400px] overflow-y-auto font-medium'>
                                     <div className={`w-full py-4 px-4 border-b border-ray-200 cursor-pointer hover:bg-gray-50 
                                     ${lead_stage == "Any" && "bg-gray-50"}`} onClick={() => TriggerStage("Any")}>Any</div>
@@ -248,33 +248,35 @@ const AllUsers = () => {
                     </div>
                 </div>
 
-                <div className="w-full mt-3 border border-gray-200 rounded-md overflow-hidden shadow-xl">
-                    {/* Header */}
-                    <div className=" bg-gray-100 grid grid-cols-[repeat(4,1fr)_minmax(100px,100px)] *:text-wrap *:break-all *:px-4 *:py-3 *:font-medium">
-                        <div className="cell-header">Fullname</div>
-                        <div className="cell-header">Email</div>
-                        <div className="cell-header">Phone</div>
-                        <div className="cell-header">Last Seen</div>
-                        <div className="cell-header">Actions</div>
-                    </div>
+                <div className="w-full max-w-[100%] overflow-hidden overflow-x-auto mt-3 border border-gray-200 rounded-md shadow-xl">
+                    <div className='w-full min-w-[1000px]'>
+                        {/* Header */}
+                        <div className=" bg-gray-100 grid grid-cols-[repeat(4,1fr)_minmax(100px,100px)] *:text-wrap *:break-all *:px-4 *:py-3 *:font-medium">
+                            <div className="cell-header">Fullname</div>
+                            <div className="cell-header">Email</div>
+                            <div className="cell-header">Phone</div>
+                            <div className="cell-header">Last Seen</div>
+                            <div className="cell-header">Actions</div>
+                        </div>
 
-                    <div className='w-full divide-y divide-gray-200'>
-                        {/* Loader */}
-                        {!users_fetched && <div className=' col-span-full h-[250px] bg-white flex items-center justify-center'>
-                            <AiOutlineLoading3Quarters size={30} className='animate animate-spin' />
-                        </div>}
-                        {/* Rows */}
-                        {
-                            users_fetched && (
-                                (users.length && users.length > 0)
-                                    ? (users.map((user) => {
-                                        return (<UserListCard key={user.user_id} prop={user} checkedItems={checkedItems}
-                                            handleCheckboxChange={handleCheckboxChange} handleDelete={handleDelete} />)
-                                    }))
-                                    : <div className='col-span-full h-[250px] bg-white flex items-center justify-center'>
-                                        No users added yet.
-                                    </div>)
-                        }
+                        <div className='w-full divide-y divide-gray-200'>
+                            {/* Loader */}
+                            {!users_fetched && <div className=' col-span-full h-[250px] bg-white flex items-center justify-center'>
+                                <AiOutlineLoading3Quarters size={30} className='animate animate-spin' />
+                            </div>}
+                            {/* Rows */}
+                            {
+                                users_fetched && (
+                                    (users.length && users.length > 0)
+                                        ? (users.map((user) => {
+                                            return (<UserListCard key={user.user_id} prop={user} checkedItems={checkedItems}
+                                                handleCheckboxChange={handleCheckboxChange} handleDelete={handleDelete} />)
+                                        }))
+                                        : <div className='col-span-full h-[250px] bg-white flex items-center justify-center'>
+                                            No users added yet.
+                                        </div>)
+                            }
+                        </div>
                     </div>
                 </div>
 

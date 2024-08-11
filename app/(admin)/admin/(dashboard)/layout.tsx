@@ -25,7 +25,7 @@ export default function RootLayout({
       </head>
       <body className="font-Jost overflow-x-hidden">
         <Providers>
-          <div className="w-full flex relative">
+          <div className="w-full flex relative overflow-y-hidden">
             {/** <Header /> */}
             <SideBars />
             <MainContent>

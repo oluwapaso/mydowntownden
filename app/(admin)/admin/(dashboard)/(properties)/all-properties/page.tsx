@@ -130,7 +130,7 @@ const AllProperties = () => {
                 <PageTitle text={`${totalRecords} Propert${totalRecords > 1 ? "ies" : "y"}`} show_back={false} right_component={add_new_comp} />
                 <div className='h-[auto] relative box-border pb-10 mt-5'>
 
-                    <div className='w-full grid grid-cols-2 gap-6'>
+                    <div className='w-full grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6'>
                         {/* Loader */}
                         {!prop_fetched && <div className='col-span-full h-[250px] bg-white flex items-center justify-center'>
                             <AiOutlineLoading3Quarters size={30} className='animate animate-spin' />
