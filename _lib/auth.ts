@@ -43,10 +43,10 @@ export const authConfig: NextAuthOptions = {
             clientId: "",
             clientSecret: "",
         }),
-        FacebookProvider({
-            clientId: "",
-            clientSecret: "",
-        }),
+        // FacebookProvider({
+        //     clientId: "",
+        //     clientSecret: "",
+        // }),
     ],
     secret: process.env.NEXT_PUBLIC_AUTH_SECRET,
     session: {
@@ -92,8 +92,8 @@ async function updateProvidersInfo() {
     const clientCredentials = await compRepo.GetApiInfo();
     authConfig.providers[1].options.clientId = clientCredentials.data.google_auth_client_id;
     authConfig.providers[1].options.clientSecret = clientCredentials.data.google_auth_client_secret;
-    authConfig.providers[2].options.clientId = clientCredentials.data.facebook_auth_app_id;
-    authConfig.providers[2].options.clientSecret = clientCredentials.data.facebook_auth_app_secret;
+    // authConfig.providers[2].options.clientId = clientCredentials.data.facebook_auth_app_id;
+    // authConfig.providers[2].options.clientSecret = clientCredentials.data.facebook_auth_app_secret;
     
 }
 

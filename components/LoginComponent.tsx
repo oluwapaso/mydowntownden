@@ -88,14 +88,14 @@ const LoginComponent = ({ page, redirect, handleForgotPwrdModal, handleSignupMod
             }
 
             {
-                !isFBLogginIn ? <div className='w-full mt-4 bg-primary hover:bg-primary/80 py-3 px-3 flex items-center justify-center 
-              text-white rounded-md cursor-pointer' onClick={ContWithFB}>
-                    <FaFacebook size={18} className='mr-2' /> <span className='text-lg font-light'>Continue with Facebook</span>
-                </div>
-                    : <div className='w-full mt-4 bg-primary/70 py-3 px-3 flex items-center justify-center 
-                text-white rounded-md cursor-pointer' >
-                        <AiOutlineLoading3Quarters size={18} className='mr-2 animate-spin' /> <span className='text-lg font-light'>Please wait...</span>
-                    </div>
+                //     !isFBLogginIn ? <div className='w-full mt-4 bg-primary hover:bg-primary/80 py-3 px-3 flex items-center justify-center 
+                //   text-white rounded-md cursor-pointer' onClick={ContWithFB}>
+                //         <FaFacebook size={18} className='mr-2' /> <span className='text-lg font-light'>Continue with Facebook</span>
+                //     </div>
+                //         : <div className='w-full mt-4 bg-primary/70 py-3 px-3 flex items-center justify-center 
+                //     text-white rounded-md cursor-pointer' >
+                //             <AiOutlineLoading3Quarters size={18} className='mr-2 animate-spin' /> <span className='text-lg font-light'>Please wait...</span>
+                //         </div>
             }
 
             <div className='w-full flex items-center justify-center my-6 font-bold text-2xl'>Or</div>
