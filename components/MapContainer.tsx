@@ -12,6 +12,7 @@ import { grayMapStyle } from '@/_lib/data';
 import { showPageLoader } from '@/app/(user-end)/(main-layout)/GlobalRedux/app/appSlice';
 import { useDispatch } from 'react-redux';
 import moment from 'moment';
+import { FaTimes } from 'react-icons/fa';
 
 const helper = new Helpers();
 const containerStyle = {
@@ -331,6 +332,20 @@ function MapContainer({ zoom, setPayload, handleSearch, payload, properties, ini
         });
     };
 
+    // Close InfoWindow on click outside
+    useEffect(() => {
+        const handleClickOutside = (event: any) => {
+            if (selectedLandmark && !event.target.closest('.info-window')) {
+                setSelectedLandmark(null);
+            }
+        };
+
+        document.addEventListener('click', handleClickOutside, true);
+        return () => {
+            document.removeEventListener('click', handleClickOutside, true);
+        };
+    }, [selectedLandmark]);
+
     useEffect(() => {
         const neighborhood = searchParams?.get("neighborhood");
         if (isLoaded && neighborhood != "" && neighborhood != "All Neighborhoods") {// && initialLoad
@@ -381,6 +396,7 @@ function MapContainer({ zoom, setPayload, handleSearch, payload, properties, ini
         }
     });
 
+
     return (isLoaded && api_key != "") ? (
         <GoogleMap
             mapContainerStyle={containerStyle}
@@ -428,7 +444,11 @@ function MapContainer({ zoom, setPayload, handleSearch, payload, properties, ini
                 <InfoWindow
                     position={{ lat: selectedLandmark.lat, lng: selectedLandmark.lng }}
                     onCloseClick={() => setSelectedLandmark(null)}>
-                    <div className='py-3 px-3 flex flex-col'>
+                    <div className='py-3 px-3 flex flex-col relative'>
+                        <button className="absolute top-0 right-0 p-1 text-gray-600 hover:text-gray-900 cursor-pointer"
+                            onClick={() => setSelectedLandmark(null)}>
+                            <FaTimes size={15} />
+                        </button>
                         <h3 className='mb-2 font-medium'>{selectedLandmark.name}</h3>
                         <p>{selectedLandmark.address}</p>
                     </div>
