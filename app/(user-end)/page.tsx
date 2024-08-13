@@ -345,7 +345,7 @@ export default function Home() {
               <div className="w-full 2xl:w-[40vw] p-4 lg:p-10 2xl:p-20 bg-white shadow-lg 
               shadow-gray-500 relative">
                 <h1 className="w-full font-medium text-[30px] lg:text-[40px] tracking-wide leading-[35px] lg:leading-[50px]">
-                  Settle in comfortably <br />and discover new worlds
+                  Settle in Comfortable, Discover New Worlds
                 </h1>
 
                 <div className="w-full font-normal text-lg tracking-wider mt-4 leading-[34px]">
