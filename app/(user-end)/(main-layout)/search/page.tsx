@@ -391,9 +391,9 @@ export default function SearchPage() {
     map_view_cntrl = "hidden";
     list_view_cntrl = "hidden";
     if (mobileView == "Map") {
-      map_view_cntrl = "block";
+      map_view_cntrl = "!block";
     } else {
-      list_view_cntrl = "block";
+      list_view_cntrl = "!block";
     }
   }
 
