@@ -362,7 +362,7 @@ export default function Home() {
                           placeholder="Search for a city" onChange={searchCity} onFocus={() => { showCityBox() }} />
                         {
                           city_box_shown && <div className="absolute w-full left-0 top-[99px] bg-white p-3 lg:p-6 border border-t-0 border-gray-400 flex 
-                      flex-col rounded-b-lg">
+                      flex-col rounded-b-lg z-20">
                             <h1 className="w-full font-semibod text-xl">Boston Neighborhoods</h1>
                             <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-5 *:cursor-pointer *:font-normal *:w-full 
                           lg:*:px-3 *:py-4 *:border-b-2 *:border-transparent *:text-gray-700">
