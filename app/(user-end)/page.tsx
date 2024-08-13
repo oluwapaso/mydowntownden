@@ -342,13 +342,14 @@ export default function Home() {
 
 
             <div className="col-span-full xl:col-span-3 mt-0 2xl:-mt-20">
-              <div className="w-full 2xl:w-[40vw] p-4 lg:p-10 2xl:p-20 bg-white lg:rounded-br-[60px] lg:rounded-bl-2xl shadow-lg shadow-gray-500 relative">
+              <div className="w-full 2xl:w-[40vw] p-4 lg:p-10 2xl:p-20 bg-white shadow-lg 
+              shadow-gray-500 relative">
                 <h1 className="w-full font-medium text-[30px] lg:text-[40px] tracking-wide leading-[35px] lg:leading-[50px]">
-                  Feel at home, <br />explore without boundaries
+                  Settle in comfortably <br />and discover new worlds
                 </h1>
 
                 <div className="w-full font-normal text-lg tracking-wider mt-4 leading-[34px]">
-                  Experience a flexible living solution with our global network of designer-furnished apartments, available for a month, a year, or longer.
+                  Our elegantly furnished apartments offers adaptable living solutions, for stays longer than a month
                 </div>
 
                 <div className="w-full mt-4">
@@ -446,6 +447,7 @@ export default function Home() {
                   </div>
                 </div>
               </div>
+              <div className="w-full 2xl:w-[40vw] clip-v-shape bg-white h-[150px] shadow-lg"></div>
             </div>
           </div>
 
